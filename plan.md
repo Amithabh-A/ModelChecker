@@ -18,3 +18,21 @@ d. store parse tree of Ψ for later processing
 Step 2 :
 Implement bottom-up model checking algo tht outputs subsets of states of K tht satisfies Ψ
 choose an appropriate ds for fast lookup.
+
+Note :
+given K and a ctl formula ϕ, compute Sϕ = { s | s is a state of K, K,s ⊨ ϕ }
+
+conversion of ϕ to Ψ
+Formula :
+
+AG EG
+AF EF
+AU EU
+AX EX
+v ∧ ¬ ->
+
+set of CTL formula used : EG EU EX
+AG -> EF EG
+AF -> EG EF -> EU
+AU -> AF -> EG EU
+AX -> EX EX

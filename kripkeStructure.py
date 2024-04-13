@@ -1,17 +1,33 @@
 class KripkeStructure:
     def __init__(self):
         self.n = 0
-        self.states = []
-        self.start_states = []
-        self.propositions = []
-        self.transitions = dict[tuple[int, int], set[str]]
+        """
+        states S
+        """
+        self.states = list[int]
+        """
+        start states S_0
+        """
+        self.start_states = list[int]
+        """
+        transitions δ ⊆ S x S 
+        """
+        self.transitions = []  # list[tuple[int, int]]
+        """
+        propositions AP store all propositional variables of Kripke Structure 
+        """
+        self.propositions = list[str]
+        """
+        labelling function LS  for each state 
+        """
+        self.labelling_function = {}  # dict[int, list[str]]
 
-        self.set_states()
-        self.set_propositions()
+        # setup
+        self.setup()
 
     def set_states(self):
         """
-        get no of states of kripke structure and set states.
+        get n and set states as 1,...,n
         """
         if self.n == 0:
             n = int(input("Input no of states : "))
@@ -22,7 +38,7 @@ class KripkeStructure:
 
     def set_start_states(self):
         """
-        get start states of kripke structure.
+        start states of kripke structure.
         """
         self.start_states = list(
             map(int, input("input start states of kripke structure : ").split())
@@ -30,7 +46,7 @@ class KripkeStructure:
 
     def set_propositions(self):
         """
-        set states of kripke structure
+        AP of kripke structure
         """
         self.propositions = list(
             input("input propositions of kripke structure : ").split()
@@ -38,8 +54,27 @@ class KripkeStructure:
 
     def set_transitions(self):
         """
-        set transitions of kripke structure.
+        transitions of kripke structure.
         """
         while True:
-            s, e = map(int, input("input transition :").split())
-            self.transitions.add((s, e))
+            try:
+                s, e = map(int, input("transitions: ").split())
+                self.transitions.append((s, e))
+            except EOFError:
+                print()
+                break
+
+    def set_labels(self):
+        """
+        labels of each state
+        """
+        for s in range(1, self.n + 1):
+            ls = input(f"labels of state {s}: ").split()
+            self.labelling_function[s] = ls
+
+    def setup(self):
+        self.set_states()
+        self.set_start_states()
+        self.set_transitions()
+        self.set_propositions()
+        self.set_labels()
