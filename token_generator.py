@@ -1,4 +1,10 @@
-from ply import lex, yacc
+"""
+parser and AST generator for CTL formula 
+"""
+
+from ply import lex
+
+# from ply import yacc
 
 # List of token names
 tokens = (
@@ -44,7 +50,31 @@ t_RSQUARE = r"\]"
 t_A = r"A"
 t_E = r"E"
 t_U = r"U"
-t_VAR = r"[a-zB-DF-TV-Z_][a-zA-Z0-9_]*"
+# t_VAR = r"[a-zB-DF-TV-Z_][a-zA-Z0-9_]*"
+
+
+# define VAR token after reserved keywords.
+def t_VAR(t):
+    r"[a-zA-Z_][a-zA-Z0-9_]*"
+    # check if token matches any keyword :
+    reserved = {
+        "AND",
+        "OR",
+        "NOT",
+        "IMP",
+        "AG",
+        "EG",
+        "AX",
+        "EX",
+        "AF",
+        "EF",
+        "A",
+        "E",
+        "U",
+    }
+    if t.value in reserved:
+        t.type = t.value
+    return t
 
 
 # A string containing ignored characters (spaces and tabs)
