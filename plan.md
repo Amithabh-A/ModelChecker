@@ -36,3 +36,5 @@ AG -> EF EG
 AF -> EG EF -> EU
 AU -> AF -> EG EU
 AX -> EX EX
+
+('AG', ('VAR', 'f')) - ('NOT', ('EF', ('NOT', f)))
