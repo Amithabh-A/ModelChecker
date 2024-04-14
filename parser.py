@@ -37,6 +37,13 @@ def p_formula_var(p):
     p[0] = ("VAR", p[1])
 
 
+def p_formula_t(p):
+    """
+    formula : T
+    """
+    p[0] = ("T",)
+
+
 def p_formula_and(p):
     """
     formula : formula AND formula
@@ -83,7 +90,8 @@ def p_formula_ag(p):
     """
     formula : AG formula
     """
-    p[0] = ("AG", p[2])
+    # p[0] = ("AG", p[2])
+    p[0] = ("NOT", ("EF", ("NOT", p[2])))
 
 
 def p_formula_eg(p):
@@ -97,7 +105,8 @@ def p_formula_af(p):
     """
     formula : AF formula
     """
-    p[0] = ("AF", p[2])
+    # p[0] = ("AF", p[2])
+    p[0] = ("NOT", ("EG", ("NOT", p[2])))
 
 
 def p_formula_ef(p):
@@ -133,23 +142,3 @@ def p_error(p):
 
 # Build the parser
 parser = yacc.yacc()
-
-
-# Function to parse input
-def parse_input(s):
-    return parser.parse(s)
-
-
-# Example usage
-input_string = input("input formula : ")
-ast = parse_input(input_string)
-print(ast)
-
-
-import subprocess
-
-# Example shell command
-command = "./del.sh"
-
-# Run the command
-output = subprocess.run(command, shell=True, capture_output=True, text=True)

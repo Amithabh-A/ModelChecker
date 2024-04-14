@@ -12,8 +12,6 @@ tokens = (
     "IMP",
     "AG",
     "EG",
-    #    "AU",
-    #    "EU",
     "AX",
     "EX",
     "AF",
@@ -26,6 +24,7 @@ tokens = (
     "LSQUARE",  # simple rule
     "RSQUARE",  # simple rule
     "VAR",  # simple rule
+    "T",  # Added token for true
 )
 
 # Regular expression rules for simple tokens
@@ -48,6 +47,7 @@ t_LPAREN = r"\("
 t_RPAREN = r"\)"
 t_LSQUARE = r"\["
 t_RSQUARE = r"\]"
+t_T = r"T"  # Regular expression for token "T"
 # t_VAR = r"[a-zB-DF-TV-Z_][a-zA-Z0-9_]*"
 
 
@@ -69,6 +69,7 @@ def t_VAR(t):
         "A",
         "E",
         "U",
+        "T",
     }
     if t.value in reserved:
         t.type = t.value
