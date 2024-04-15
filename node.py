@@ -1,5 +1,3 @@
-from converter import parser
-
 #
 #
 # def parse_input(s):
