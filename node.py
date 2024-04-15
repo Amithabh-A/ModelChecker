@@ -11,7 +11,12 @@
 
 
 class Node:
+    """
+    node of formula in tree representation
+    """
+
     def __init__(self, t):
+        self.satisfying_states = {}
         self.node_count = 0
         self.t = t
         self.type = t[0]

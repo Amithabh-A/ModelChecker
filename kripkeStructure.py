@@ -1,25 +1,25 @@
 class KripkeStructure:
     def __init__(self):
         self.n = 0
-        """
-        states S
-        """
+        # """
+        # states S
+        # """
         self.states = list[int]
-        """
-        start states S_0
-        """
+        # """
+        # start states S_0
+        # """
         self.start_states = list[int]
-        """
-        transitions δ ⊆ S x S 
-        """
+        # """
+        # transitions δ ⊆ S x S
+        # """
         self.transitions = []  # list[tuple[int, int]]
-        """
-        propositions AP store all propositional variables of Kripke Structure 
-        """
+        # """
+        # propositions AP store all propositional variables of Kripke Structure
+        # """
         self.propositions = list[str]
-        """
-        labelling function LS  for each state 
-        """
+        # """
+        # labelling function LS  for each state
+        # """
         self.labelling_function = {}  # dict[int, list[str]]
 
         # setup
