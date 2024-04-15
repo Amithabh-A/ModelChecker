@@ -1,0 +1,27 @@
+convertToTree :: tuple -> Node
+
+data Tree a = a OR a 
+            | a AND a 
+            | a IMP a 
+            | NOT a 
+            | EG a
+            | EU a
+            | EX a
+            | Var 
+            | Nothing 
+
+converter :: (t,a,a) -> Tree a 
+converter (OR, x, y) = (x OR y)
+converter (AND, x, y) = (x OR y)
+converter (IMP, x, y) = (x OR y)
+converter (EU, x, y) = (x EU y)
+
+nodeNumber (x OR y) = 1 + (nodeNumber x) + (nodeNumber y)
+nodeNumber (x AND y) = 1 + (nodeNumber x) + (nodeNumber y)
+nodeNumber (x IMP y) = 1 + (nodeNumber x) + (nodeNumber y)
+nodeNumber (x EU y) = 1 + (nodeNumber x) + (nodeNumber y)
+nodeNumber (NOT x) = 1 + (nodeNumber x)
+nodeNumber (EG x) = 1 + (nodeNumber x)
+nodeNumber (EX x) = 1 + (nodeNumber x)
+nodeNumber (VAR s) = 1
+nodeNumber Nothing = 0

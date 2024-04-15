@@ -78,3 +78,10 @@ class KripkeStructure:
         self.set_transitions()
         self.set_propositions()
         self.set_labels()
+
+
+class CTLformula:
+    def __init__(self, parser):
+        self.input = input("Input formula : ")
+        self.parser = parser
+        self.ast = self.parser.parse(self.input)

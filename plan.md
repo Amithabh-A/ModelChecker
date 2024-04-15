@@ -32,6 +32,9 @@ AX EX
 v ∧ ¬ ->
 
 set of CTL formula used : EG EU EX
+
+types : OR, AND, NOT, IMP, EG, EU, EX
+
 AG -> EF EG
 AF -> EG EF -> EU
 AU -> AF -> EG EU
