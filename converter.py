@@ -106,7 +106,7 @@ def p_formula_ag(p):
     """
     # p[0] = ("ag", p[2])
     # ag ϕ = ¬(ef ¬ϕ) = ¬(eu (T, ¬ϕ ))
-    p[0] = ("not", ("EU", ("T",), ("NOT", p[2])))
+    p[0] = ("NOT", ("EU", ("T",), ("NOT", p[2])))
 
 
 def p_formula_eg(p):

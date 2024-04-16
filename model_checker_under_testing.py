@@ -26,8 +26,9 @@ class ModelChecker:
             "EU": 2,
             "EX": 1,
             "VAR": 0,
+            "T": 0,
         }
-        self.fill_states(self.formula)
+        self.postorder_traversal_for_model_checking(self.formula)
 
     def postorder_traversal_for_model_checking(self, node: Node) -> None:
         """
@@ -52,6 +53,8 @@ class ModelChecker:
         """
         fill node.satisfying_state with states that satisfy that node (formula)
         """
+        if node.type == "T":
+            self.fill_t_states(node)
         if node.type == "VAR":
             self.fill_var_states(node)
         elif node.type == "OR":
@@ -68,6 +71,12 @@ class ModelChecker:
             self.fill_eg_states(node)
         elif node.type == "EX":
             self.fill_ex_states(node)
+
+    def fill_t_states(self, node: Node) -> None:
+        """
+        add all states
+        """
+        node.satisfying_states = copy.deepcopy(self.kripke_structure.states)
 
     def fill_var_states(self, node: Node):
         """
@@ -180,6 +189,7 @@ class ModelChecker:
                             break
                     else:
                         node.satisfying_states.remove(s)
+                        repeat = True
 
     def fill_ex_states(self, node: Node) -> None:
         """

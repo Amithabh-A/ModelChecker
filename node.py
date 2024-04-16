@@ -50,7 +50,7 @@ class Node:
         given a node, print its inorder traversal
         a node's child/left/right could be node or string.
         """
-        print(self.type, self.t)
+        print(self.type)
         if self.length == 2:
 
             if isinstance(self.child, Node):
@@ -70,3 +70,6 @@ class Node:
                 self.right.inorder_traversal()
             elif self.right is not None:
                 print(self.right)
+
+    def show(self):
+        print(self.t)

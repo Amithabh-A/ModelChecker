@@ -34,7 +34,8 @@ class KripkeStructure:
         get n and set states as 1,...,n
         """
         if self.n == 0:
-            n = int(input("Input no of states : "))
+            # n = int(input("Input no of states : "))
+            n = int(input())
             self.n = n
         else:
             print("state length already set!")
@@ -46,7 +47,8 @@ class KripkeStructure:
         start states of kripke structure.
         """
         self.start_states = set(
-            list(map(int, input("input start states of kripke structure : ").split()))
+            # list(map(int, input("input start states of kripke structure : ").split()))
+            list(map(int, input().split()))
         )
 
     def set_propositions(self):
@@ -54,7 +56,8 @@ class KripkeStructure:
         AP of kripke structure
         """
         self.propositions = set(
-            list(input("input propositions of kripke structure : ").split())
+            # list(input("input propositions of kripke structure : ").split())
+            list(input().split())
         )
 
     def set_transitions(self):
@@ -63,7 +66,8 @@ class KripkeStructure:
         """
         while True:
             try:
-                s, e = map(int, input("transitions: ").split())
+                # s, e = map(int, input("transitions: ").split())
+                s, e = map(int, input().split())
                 self.transitions.add((s, e))
             except:
                 print()
@@ -74,7 +78,8 @@ class KripkeStructure:
         labels of each state
         """
         for s in range(1, self.n + 1):
-            ls = set(input(f"labels of state {s}: ").split())
+            # ls = set(input(f"labels of state {s}: ").split())
+            ls = set(input().split())
             self.labelling_function[s] = ls
 
     def setup(self):
