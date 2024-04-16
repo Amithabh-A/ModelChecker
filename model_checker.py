@@ -61,6 +61,8 @@ class ModelChecker:
             self.fill_imp_states(node)
         elif node.type == "NOT":
             self.fill_not_states(node)
+        elif node.type == "EU":
+            self.fill_eu_states(node)
 
     def fill_var_states(self, node: Node):
         """
@@ -117,7 +119,7 @@ class ModelChecker:
             set(self.kripke_structure.states) - node.left.satisfying_states
         ) | node.right.satisfying_states
 
-    def fill_ef_states(self, node: Node) -> None:
+    def fill_eu_states(self, node: Node) -> None:
         """
         E [ϕ ∪ Ψ] = Ψ v [ϕ ∧ EX E [ϕ ∪ Ψ]]
         """
@@ -129,3 +131,20 @@ class ModelChecker:
 
         # Initialisation
         node.satisfying_states = copy.deepcopy(node.right.satisfying_states)
+        # Repeat
+        repeat = True
+        while repeat:
+            repeat = False
+            # for all states s of K :
+            for s in self.kripke_structure.states:
+                # if s ∈ Sϕ
+                if s in node.left.satisfying_states:
+                    s_successors = self.kripke_structure.immediate_successor(s)
+                    # if atleast one immediate successor s_ of s ∈ S_e ϕ ∪ Ψ
+                    for s_ in s_successors:
+                        # if s_ in node.satisfying_states
+                        if s_ in node.satisfying_states:
+                            l = len(node.satisfying_states)
+                            node.satisfying_states.add(s_)
+                            if l != len(node.satisfying_states):
+                                repeat = True
