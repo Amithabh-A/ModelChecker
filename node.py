@@ -1,15 +1,3 @@
-#
-#
-# def parse_input(s):
-#     return parser.parse(s)
-#
-#
-# # Example usage
-# input_string = input("Input formula : ")
-# t = parse_input(input_string)
-#
-
-
 class Node:
     """
     node of formula in tree representation
@@ -25,26 +13,10 @@ class Node:
         self.left = None
         self.right = None
         if self.length == 2:
-            # if isinstance(t[1], (tuple)):
-            #     self.child = Node(t[1])
-            # else:
-            #     self.child = t[1]
-
             self.child = Node(t[1]) if isinstance(t[1], (tuple)) else t[1]
 
         elif self.length == 3:
-            # if isinstance(t[1], (tuple)):
-            #     self.left = Node(t[1])
-            # else:
-            #     self.left = t[1]
-
             self.left = Node(t[1]) if isinstance(t[1], (tuple)) else t[1]
-
-            # if isinstance(t[2], (tuple)):
-            #     self.right = Node(t[2])
-            # else:
-            #     self.right = t[2]
-
             self.right = Node(t[2]) if isinstance(t[2], (tuple)) else t[2]
         self.set_node_count()
 

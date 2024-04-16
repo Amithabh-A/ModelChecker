@@ -25,3 +25,5 @@ nodeNumber (EG x) = 1 + (nodeNumber x)
 nodeNumber (EX x) = 1 + (nodeNumber x)
 nodeNumber (VAR s) = 1
 nodeNumber Nothing = 0
+
+modelChecking :: Node -> 

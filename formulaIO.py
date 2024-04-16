@@ -6,9 +6,9 @@ class FormulaParser:
     def __init__(self, formula_parser, formula) -> None:
         self.parser = formula_parser
         self.formula = formula
-        self.parse_input()
+        self.parse()
 
-    def parse_input(self):
+    def parse(self):
         self.ast = Node(parser.parse(self.formula))
 
 
