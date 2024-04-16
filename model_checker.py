@@ -65,4 +65,6 @@ class ModelChecker:
         """
         take union of satisfying states of left and right decendents
         """
-        pass
+        node.satisfying_states = (
+            node.left.satisfying_states | node.right.satisfying_states
+        )
