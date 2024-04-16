@@ -1,16 +1,19 @@
+"""
+class definition for formula input and parse
+"""
+
 from converter import parser
 from node import Node
 
 
-class FormulaParser:
-    def __init__(self, formula_parser, formula) -> None:
+class Formula:
+    def __init__(self, formula_parser=parser) -> None:
         self.parser = formula_parser
-        self.formula = formula
+        self.formula = input("Input formula : ")
         self.parse()
 
     def parse(self):
+        """
+        parse formula using (input) parser
+        """
         self.ast = Node(parser.parse(self.formula))
-
-
-s = input("Input formula : ")
-f = FormulaParser(parser, s)

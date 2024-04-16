@@ -70,9 +70,3 @@ class Node:
                 self.right.inorder_traversal()
             elif self.right is not None:
                 print(self.right)
-
-
-p = Node(("not", ("EU", ("T",), ("NOT", ("VAR", "f")))))
-print("Inorder Traversal")
-p.inorder_traversal()
-print(p.node_count)

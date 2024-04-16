@@ -27,6 +27,7 @@ class ModelChecker:
             "EX": 1,
             "VAR": 0,
         }
+        self.fill_states(self.formula)
 
     def postorder_traversal_for_model_checking(self, node: Node) -> None:
         """

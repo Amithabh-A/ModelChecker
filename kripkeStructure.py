@@ -65,7 +65,7 @@ class KripkeStructure:
             try:
                 s, e = map(int, input("transitions: ").split())
                 self.transitions.add((s, e))
-            except EOFError:
+            except:
                 print()
                 break
 
