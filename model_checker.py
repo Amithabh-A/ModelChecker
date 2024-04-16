@@ -2,6 +2,8 @@
 Contains ModelChecker class and model checker testing arena
 """
 
+import copy
+
 from kripkeStructure import KripkeStructure
 from node import Node
 
@@ -29,7 +31,8 @@ class ModelChecker:
     def postorder_traversal_for_model_checking(self, node: Node) -> None:
         """
         traverse AST in postorder traversal.
-        If we are in var node, we will add the states that satisfying that proposition and backtrack.
+        If we are in var node, we will add the states
+        that satisfying that proposition and backtrack.
         """
         if self.types[node.type] == 1:
             if node.child is None:
@@ -51,20 +54,78 @@ class ModelChecker:
         if node.type == "VAR":
             self.fill_var_states(node)
         elif node.type == "OR":
-            pass
+            self.fill_or_states(node)
+        elif node.type == "AND":
+            self.fill_and_states(node)
+        elif node.type == "IMP":
+            self.fill_imp_states(node)
+        elif node.type == "NOT":
+            self.fill_not_states(node)
 
     def fill_var_states(self, node: Node):
         """
-        go over all states of Kripke structure, find states that satisfy the proposition of input node
+        go over all states of Kripke structure, find states
+        that satisfy the proposition of input node
         """
         for state in self.kripke_structure.states:
             if node.child in self.kripke_structure.labelling_function[state]:
                 node.satisfying_states.add(state)
 
-    def fill_or_states(self, node: Node):
+    def fill_or_states(self, node: Node) -> None:
         """
         take union of satisfying states of left and right decendents
         """
+        if node.left is None:
+            raise TypeError("node.left is None, which is not allowed. ")
+        if node.right is None:
+            raise TypeError("node.right is None, which is not allowed. ")
         node.satisfying_states = (
             node.left.satisfying_states | node.right.satisfying_states
         )
+
+    def fill_and_states(self, node: Node) -> None:
+        """
+        take intersection of satisfying states of left and right decendents
+        """
+        if node.left is None:
+            raise TypeError("node.left is None, which is not allowed. ")
+        if node.right is None:
+            raise TypeError("node.right is None, which is not allowed. ")
+        node.satisfying_states = (
+            node.left.satisfying_states & node.right.satisfying_states
+        )
+
+    def fill_not_states(self, node: Node) -> None:
+        """
+        Find states that does not satisfy the child descendent
+        """
+        if node.child is None:
+            raise TypeError("node.child is None, which is not allowed. ")
+        node.satisfying_states = (
+            set(self.kripke_structure.states) - node.child.satisfying_states
+        )
+
+    def fill_imp_states(self, node: Node) -> None:
+        """
+        p -> q ≡ ¬p v q
+        """
+        if node.left is None:
+            raise TypeError("node.left is None, which is not allowed. ")
+        if node.right is None:
+            raise TypeError("node.right is None, which is not allowed. ")
+        node.satisfying_states = (
+            set(self.kripke_structure.states) - node.left.satisfying_states
+        ) | node.right.satisfying_states
+
+    def fill_ef_states(self, node: Node) -> None:
+        """
+        E [ϕ ∪ Ψ] = Ψ v [ϕ ∧ EX E [ϕ ∪ Ψ]]
+        """
+
+        if node.left is None:
+            raise TypeError("node.left is None, which is not allowed. ")
+        if node.right is None:
+            raise TypeError("node.right is None, which is not allowed. ")
+
+        # Initialisation
+        node.satisfying_states = copy.deepcopy(node.right.satisfying_states)
