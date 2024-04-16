@@ -8,7 +8,7 @@ class KripkeStructure:
         """
         states S
         """
-        self.states = list[int]
+        self.states = []  # list[int]
         """
         start states S_0
         """

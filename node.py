@@ -4,7 +4,7 @@ class Node:
     """
 
     def __init__(self, t):
-        self.satisfying_states = {}
+        self.satisfying_states = set()
         self.node_count = 0
         self.t = t
         self.type = t[0]

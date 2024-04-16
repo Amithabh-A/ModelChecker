@@ -45,8 +45,24 @@ class ModelChecker:
         self.fill_states(node)
 
     def fill_states(self, node: Node) -> None:
+        """
+        fill node.satisfying_state with states that satisfy that node (formula)
+        """
         if node.type == "VAR":
             self.fill_var_states(node)
+        elif node.type == "OR":
+            pass
 
     def fill_var_states(self, node: Node):
+        """
+        go over all states of Kripke structure, find states that satisfy the proposition of input node
+        """
+        for state in self.kripke_structure.states:
+            if node.child in self.kripke_structure.labelling_function[state]:
+                node.satisfying_states.add(state)
+
+    def fill_or_states(self, node: Node):
+        """
+        take union of satisfying states of left and right decendents
+        """
         pass
