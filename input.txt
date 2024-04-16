@@ -6,17 +6,17 @@
 3 5
 2 6
 2 7
-4 4
-5 5
-6 6
+4 5
+5 6
 7 7
+6 5
 
-p q
-p
-p
+p q r
 p
 q
 p
-p
-p
-E [p U q]
+p r
+q
+q
+q
+EX EF r

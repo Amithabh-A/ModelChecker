@@ -3,7 +3,6 @@ from kripkeStructure import KripkeStructure
 from model_checker import ModelChecker
 
 K = KripkeStructure()
-formula = Formula()
-
-MC = ModelChecker(formula.ast, K)
+f = Formula().parse()
+MC = ModelChecker(f, K)
 print(MC.formula.satisfying_states)

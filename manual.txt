@@ -1,8 +1,13 @@
 Input no of states : 
+
 input start states of kripke structure : 
+
 transitions:
 -- this can be done till an empty line occurs
+
 input propositions of kripke structure : 
+
 labels of state i: 
 -- i : 1 -> n
+
 Input formula : 

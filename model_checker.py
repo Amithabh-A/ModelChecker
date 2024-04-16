@@ -159,7 +159,7 @@ class ModelChecker:
                         # if s_ in node.satisfying_states
                         if s_ in node.satisfying_states:
                             l = len(node.satisfying_states)
-                            node.satisfying_states.add(s_)
+                            node.satisfying_states.add(s)
                             if l != len(node.satisfying_states):
                                 repeat = True
 
