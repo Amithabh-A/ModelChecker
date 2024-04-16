@@ -63,6 +63,10 @@ class ModelChecker:
             self.fill_not_states(node)
         elif node.type == "EU":
             self.fill_eu_states(node)
+        elif node.type == "EG":
+            self.fill_eg_states(node)
+        elif node.type == "EX":
+            self.fill_ex_states(node)
 
     def fill_var_states(self, node: Node):
         """
@@ -148,3 +152,47 @@ class ModelChecker:
                             node.satisfying_states.add(s_)
                             if l != len(node.satisfying_states):
                                 repeat = True
+
+    def fill_eg_states(self, node: Node) -> None:
+        """
+        EG ϕ = ϕ ∧ EX EG ϕ
+        """
+        if node.child is None:
+            raise TypeError("node.child is None, which is not allowed. ")
+
+        # Initialisation
+        # add all states satisfying ϕ in S EG ϕ
+        node.satisfying_states = copy.deepcopy(node.child.satisfying_states)
+        # repeat
+        repeat = True
+        while repeat:
+            repeat = False
+            # for all states s of K:
+            for s in self.kripke_structure.states:
+                # if s ∈ S EG ϕ
+                if s in node.satisfying_states:
+                    s_successors = self.kripke_structure.immediate_successor(s)
+                    # If no successors s_ ∈ S EG ϕ, remove s from S EG ϕ
+                    for s_ in s_successors:
+                        # if s_ in S EGϕ, nothing to remove. break from loop
+                        if s_ in node.satisfying_states:
+                            break
+                    else:
+                        node.satisfying_states.remove(s)
+
+    def fill_ex_states(self, node: Node) -> None:
+        """
+        EX ϕ
+        """
+
+        if node.child is None:
+            raise TypeError("node.child is None, which is not allowed. ")
+
+        # for all states s of K
+        for s in self.kripke_structure.states:
+            # if ∃ s' st s' ∈ Sϕ, add s to S EX ϕ
+            s_successors = self.kripke_structure.immediate_successor(s)
+            for s_ in s_successors:
+                if s_ in node.child.satisfying_states:
+                    node.satisfying_states.add(s)
+                    break
