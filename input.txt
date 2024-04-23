@@ -19,4 +19,4 @@ p r
 q
 q
 q
-EX EF r
+AG EF p

@@ -5,7 +5,7 @@ all:
 	pip install -r requirements.txt
 
 run:
-	python3 driver.py < input.txt
+python3 driver.py < input.txt
 
 clean : 
 	rm parser.out
