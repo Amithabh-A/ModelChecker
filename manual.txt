@@ -11,3 +11,7 @@ labels of state i:
 -- i : 1 -> n
 
 Input formula : 
+
+
+* labelling with emmpty set of propositions
+* inputting false

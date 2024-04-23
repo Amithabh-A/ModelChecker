@@ -5,8 +5,9 @@ for CTL formula
 
 import copy
 
-from lexer import tokens
 from ply import yacc
+
+from lexer import tokens
 
 # Grammar rules and precedence
 precedence = (
@@ -45,6 +46,13 @@ def p_formula_t(p):
     formula : T
     """
     p[0] = ("T",)
+
+
+def p_formula_n(p):
+    """
+    formula : N
+    """
+    p[0] = ("NOT", ("T",))
 
 
 def p_formula_and(p):

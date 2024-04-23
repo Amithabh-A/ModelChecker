@@ -158,10 +158,13 @@ class ModelChecker:
                     for s_ in s_successors:
                         # if s_ in node.satisfying_states
                         if s_ in node.satisfying_states:
-                            l = len(node.satisfying_states)
-                            node.satisfying_states.add(s)
-                            if l != len(node.satisfying_states):
+                            if s not in node.satisfying_states:
+                                node.satisfying_states.add(s)
                                 repeat = True
+                            # l = len(node.satisfying_states)
+                            # node.satisfying_states.add(s)
+                            # if l != len(node.satisfying_states):
+                            #     repeat = True
 
     def fill_eg_states(self, node: Node) -> None:
         """
